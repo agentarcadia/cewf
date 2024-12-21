@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Windows UI</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .desktop {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            padding: 20px;
+        }
+
+        .icon {
+            width: 100px;
+            text-align: center;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .icon:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .icon img {
+            width: 72px;
+            height: 72px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .icon span {
+            color: white;
+            font-size: 14px;
+            text-shadow: 1px 1px black;
+        }
+
+        .taskbar {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 40px;
+            background-color: #C0C0C0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
+        }
+
+        .start-button {
+            background-color: #000080;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .start-button img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+
+        .date-time {
+            font-size: 14px;
+            font-weight: bold;
+            color: black;
+        }
+
+        .video-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <video class="background-video" id="bgVideo" autoplay loop>
+        <source src="VonOff1700- Dead N____s ft. Polo G and G Herbo (Official Video) (1).mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="desktop">
+        
+        <div class="icon" onclick="location.href='https://example.com/recycle-bin';">
+            <img src="https://via.placeholder.com/72" alt="Recycle Bin">
+            <span>allies</span>
+        </div>
+        <div class="icon" onclick="location.href='https://instagram.com';">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+            <span>Instagram</span>
+        </div>
+        <div class="icon" onclick="location.href='https://discord.com';">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Discord_logo.svg" alt="Discord">
+            <span>Discord</span>
+        </div>
+    </div>
+
+    <div class="taskbar">
+        <button class="start-button">
+            <img src="ss.png" alt="Windows Logo">
+            Start
+        </button>
+        <div class="date-time" id="dateTime"></div>
+    </div>
+
+    <div class="video-controls" id="videoControl">Mute</div>
+
+    <script>
+        // Update date and time
+        function updateDateTime() {
+            const now = new Date();
+            const formattedTime = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            const formattedDate = now.toLocaleDateString();
+            document.getElementById('dateTime').textContent = `${formattedDate} ${formattedTime}`;
+        }
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+
+        // Video mute/unmute controls
+        const video = document.getElementById('bgVideo');
+        const videoControl = document.getElementById('videoControl');
+        videoControl.addEventListener('click', () => {
+            if (video.muted) {
+                video.muted = false;
+                videoControl.textContent = 'Mute';
+            } else {
+                video.muted = true;
+                videoControl.textContent = 'Unmute';
+            }
+        });
+    </script>
+</body>
+</html>
